@@ -1,16 +1,27 @@
-const getComputerChoice = function () {
-  let number = Math.floor(Math.random() * 3 + 1);
+const buttonsNames = ["Paper", "Rock", "Scissors"];
 
-  let selection;
-  if (number === 1) {
-    selection = "Rock";
-  } else if (number === 2) {
-    selection = "Paper";
+const buttons = buttonsNames.map((buttonText) => {
+  const button = document.createElement("button");
+  button.className = "btn";
+  button.textContent = buttonText;
+  document.body.appendChild(button);
+  return button;
+});
+console.log(buttons.entries);
+
+const getComputerChoice = function () {
+  let randomNumber = Math.floor(Math.random() * 3 + 1);
+
+  let computerChoice;
+  if (randomNumber === 1) {
+    computerChoice = "Rock";
+  } else if (randomNumber === 2) {
+    computerChoice = "Paper";
   } else {
-    selection = "Scissors";
+    computerChoice = "Scissors";
   }
-  console.log(selection);
-  return selection;
+  console.log(computerChoice);
+  return computerChoice;
 };
 
 const playRound = function (playerSelection, computerSelection) {
@@ -44,31 +55,37 @@ const playRound = function (playerSelection, computerSelection) {
   console.log(playerScore);
   return playerScore;
 };
+buttons.forEach((button) => {
+  button.addEventListener(
+    "click",
+    playRound(button.textContent, getComputerChoice)
+  );
+});
 
 const game = function () {
   let playerTotal = 0;
   let computerTotal = 0;
-  let result;
-  for (let i = 0; i < 5; i++) {
-    let getPlayerChoice = prompt("Choose rock, paper or scissors");
-    console.log(getPlayerChoice);
-    let result = playRound(getPlayerChoice, getComputerChoice());
-    console.log(result);
-    console.log(i);
-    if (result === true) {
-      playerTotal++;
-    } else if (result === false) {
-      computerTotal++;
-    }
-  }
-  if (playerTotal > computerTotal) {
-    console.log("Congrats! You won the game");
-  } else if (playerTotal < computerTotal) {
-    console.log("Sorry, you lost the game");
-  } else {
-    console.log("It's a draw");
-  }
-  console.log(playerTotal, computerTotal);
+  let roundResult;
+  // for (let i = 0; i < 5; i++) {
+  //   let getPlayerChoice = prompt("Choose rock, paper or scissors");
+  //   console.log(getPlayerChoice);
+  //   let roundResult = playRound(getPlayerChoice, getComputerChoice());
+  //   console.log(roundResult);
+  //   console.log(i);
+  //   if (roundResult === true) {
+  //     playerTotal++;
+  //   } else if (roundResult === false) {
+  //     computerTotal++;
+  //   }
+  // }
+  // if (playerTotal > computerTotal) {
+  //   console.log("Congrats! You won the game");
+  // } else if (playerTotal < computerTotal) {
+  //   console.log("Sorry, you lost the game");
+  // } else {
+  //   console.log("It's a draw");
+  // }
+  // console.log(playerTotal, computerTotal);
 };
 
 game();
